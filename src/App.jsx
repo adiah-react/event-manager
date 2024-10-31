@@ -1,4 +1,12 @@
+import { CssBaseline } from "@mui/material";
+import React from "react";
+
 const App = () => {
-  return <div>App</div>;
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <div>App</div>
+    </React.Fragment>
+  );
 };
 export default App;
