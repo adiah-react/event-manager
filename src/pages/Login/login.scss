@@ -1,0 +1,111 @@
+@use "../../sass/abstracts/" as abs;
+
+.login {
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: abs.rem(60) abs.rem(30) abs.rem(30) abs.rem(30);
+
+  background-size: cover;
+  background-position: center center;
+
+  color: white;
+
+  &.morning {
+    background-image: url(../../assets/images/backgrounds/login-morning.jpg);
+  }
+
+  &.afternoon {
+    background-image: url(../../assets/images/backgrounds/login-afternoon.jpg);
+  }
+
+  &.night {
+    background-image: url(../../assets/images/backgrounds/login-night.jpg);
+  }
+
+  &__greeting {
+    font-family: var(--ff-sans);
+    font-size: abs.rem(44);
+    font-weight: 400;
+
+    .time {
+      border-bottom: 2px solid #a2d736;
+      text-transform: capitalize;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+
+    .input-wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding-bottom: 0.125rem;
+      border-bottom: 1px solid white;
+
+      input {
+        width: calc(100vw - 24px - abs.rem(60));
+        border: none;
+        background-color: transparent;
+        color: white;
+        font-weight: 400;
+
+        &::placeholder {
+          color: white;
+          font-weight: 400;
+          font-size: 1rem;
+          font-family: var(--ff-sans);
+        }
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .form-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: abs.rem(36);
+
+      .button {
+        padding: 8px 30px 6px 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background-color: transparent;
+        border: 1px solid white;
+        border-radius: 4px;
+        color: white;
+        font-weight: 400;
+        text-decoration: none;
+
+        &.sign-up {
+          border-color: #87a7b9;
+          color: #87a7b9;
+        }
+      }
+    }
+
+    .password-reset {
+      a {
+        font-size: abs.rem(15);
+        font-weight: 400;
+        text-decoration: none;
+        color: white;
+      }
+    }
+  }
+}
