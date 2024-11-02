@@ -1,0 +1,29 @@
+$type-scale: (
+	small: (
+		300: 1rem, // / nav
+		400: 1rem, //body
+		500: 1.563rem,
+		600: 1.953rem,
+		700: 2.125rem, //hero title
+		800: 3.052rem),
+	large: (
+		300: 1rem, // nav
+		400: 1.1875rem, //body
+		500: 2rem,
+		600: 2.827rem,
+		700: 4.9375rem, // hero title
+		800: 5.653rem)
+);
+
+// mobile: 
+// hero body & nav- 16px 500 letter-spacing 11 line height 26/16
+// hero title -  34px 700 ls:11 
+// hero cta - 16px 500 ls:0
+
+// desktop:
+// nav - 15px 500 ls:-29 
+
+// hero body  - 19px 500 letter-spacing -21 line height 28
+	// 1.1875rem
+// hero title -  79px 700 ls: -6 lh:82
+// hero cta - 19px 500 ls:-45

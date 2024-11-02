@@ -1,0 +1,37 @@
+@use "../abstracts/" as a;
+
+:root {
+  // colors
+  --clr-dark: hsl(0, 0%, 8%);
+  --clr-gray: hsla(0, 1%, 60%, 0.43);
+  --clr-light: hsl(0, 0%, 98%);
+
+  --clr-dark-pink: #fc4a68;
+  --clr-dull-pink: #ffdcdf;
+  --clr-bright-pink: #fdb4cf;
+
+  --clr-dark-gray: hsla(0, 0%, 31%, 1);
+  --clr-emphasis: hsla(0, 0%, 20%, 1);
+  --clr-medium: hsla(0, 0%, 51%, 1);
+  --clr-blue: hsla(214, 84%, 56%, 1);
+
+  // font-families
+  --ff-sans: "Inter", sans-serif;
+  --ff-serif: "Italianno", serif;
+
+  // font-sizes from ../abstract/type
+  // Might need to add more breakpoints
+  @each $screen-size, $font-size in a.$type-scale {
+    @if $screen-size == small {
+      @each $size, $value in $font-size {
+        --fs-#{$size}: #{$value};
+      }
+    } @else {
+      @include a.breakpoint(medium) {
+        @each $size, $value in $font-size {
+          --fs-#{$size}: #{$value};
+        }
+      }
+    }
+  }
+}

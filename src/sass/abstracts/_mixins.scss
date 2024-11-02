@@ -1,0 +1,17 @@
+@use 'breakpoints' as bp;
+
+@mixin breakpoint($key) {
+	$size: map-get(bp.$breakpoints-up, $key);
+
+	@media (min-width: $size) {
+		@content
+	}
+}
+
+@mixin breakpoint-down($key) {
+	$size: map-get(bp.$breakpoints-down, $key);
+
+	@media (max-width: $size) {
+		@content
+	}
+}
