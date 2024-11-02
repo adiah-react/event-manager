@@ -2,7 +2,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { MdLockOutline, MdOutlinePerson } from "react-icons/md";
 import { Navigate, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Spinner from "../../components/ui/Spinner/Spinner";
@@ -12,6 +12,18 @@ import useAuthStatus from "../../hooks/useAuthStatus";
 import "./login.scss";
 
 const Login = () => {
+  const date = new Date();
+  const currentHour = date.getHours();
+
+  let time = "";
+  if ((currentHour >= 12) & (currentHour < 18)) {
+    time = "afternoon";
+  } else if (currentHour >= 18) {
+    time = "night";
+  } else {
+    time = "morning";
+  }
+
   const showPassword = false;
   const { loggedIn, checkingStatus } = useAuthStatus();
 
@@ -59,19 +71,17 @@ const Login = () => {
   }
 
   return (
-    <div className="login morning">
+    <div className={`login ${time}`}>
       <div className="login__greeting">
-        Good <span className="time">morning</span>
+        Good <span className="time">{time}</span>
       </div>
-
-      <ToastContainer />
 
       <form onSubmit={onSubmit}>
         <div className="input-wrapper">
           <input
-            type="text"
+            type="email"
             className="username-input"
-            placeholder="Username"
+            placeholder="Email"
             id="username"
             value={username}
             onChange={onChange}

@@ -37,20 +37,17 @@ p {
 body {
   font-family: var(--ff-sans);
   font-size: var(--fs-400);
-  font-weight: 700;
-  // background-color: var(--clr-gray);
-  // background: linear-gradient(#fbf2f2, #fbd0d8);
-  color: var(--clr-dark);
+  font-weight: 500;
+  background-color: var(--clr-dark);
+  color: var(--clr-light);
   line-height: 1.5;
   min-height: 100vh;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  // display: flex;
 
-  @include abs.breakpoint(xlarge) {
-    justify-content: center;
-  }
+  // @include abs.breakpoint(xlarge) {
+  //   justify-content: center;
+  // }
 
   // Using aic, causes the padding to not work on smaller screens
   // investigate further.
@@ -61,43 +58,6 @@ body {
   &.noscroll {
     overflow: hidden;
   }
-}
-
-#root {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  // justify-content: space-between;
-  // gap: abs.rem(22);
-  width: 100%;
-  min-height: 100vh;
-
-  // padding-block: abs.rem(66);
-  // padding-block: abs.rem(32);
-  // padding-inline: abs.rem(20);
-
-  // background-image: url(../../assets/images/backgrounds/christmas.png);
-  background-image: linear-gradient(
-      rgba(255, 255, 255, 0.45),
-      rgba(255, 255, 255, 0.45)
-    ),
-    url(../assets/images/backgrounds/christmas.png);
-  background-size: contain;
-  background-position: center bottom;
-  // background-repeat: no-repeat;
-}
-
-.content-container {
-  padding-block: abs.rem(32);
-  padding-inline: abs.rem(20);
-}
-
-.love-message {
-  font-family: var(--ff-serif);
-  font-size: abs.rem(50);
-  max-width: abs.rem(218);
-  text-align: center;
-  margin-top: abs.rem(43);
 }
 
 // Make images easier to work with
@@ -126,4 +86,64 @@ select {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+.accent {
+  color: var(--clr-accent);
+}
+
+.container {
+  @include abs.breakpoint(large) {
+    width: 85%;
+    max-width: abs.rem(1600);
+  }
+}
+
+.section__header {
+  font-size: abs.rem(14);
+  font-weight: medium;
+  color: var(--clr-section-header);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.section__subheader {
+  font-size: abs.rem(32);
+  font-weight: medium;
+  color: var(--clr-light);
+  text-align: center;
+  margin-top: abs.rem(5);
+}
+
+.button {
+  position: relative;
+  color: var(--clr-dark);
+  font-family: var(--ff-sans);
+  background-color: var(--clr-accent);
+  border-radius: 6px;
+  padding: abs.rem(16) abs.rem(24);
+  padding-right: abs.rem(56);
+  font-size: abs.rem(20);
+  text-decoration: none;
+
+  //   display: flex;
+  //   align-items: center;
+  //   gap: 0.5rem;
+
+  span {
+    // font-size: abs.rem(20);
+    // width: abs.rem(20);
+    position: absolute;
+    top: 55%;
+    transform: translateY(-50%);
+    svg {
+      height: abs.rem(24);
+      width: abs.rem(24);
+      margin-left: 0.5rem;
+    }
+  }
+  //  change to roboto?
+  // &--icon {
+
+  // }
 }
