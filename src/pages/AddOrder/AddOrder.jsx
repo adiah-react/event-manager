@@ -4,9 +4,14 @@ import { useNavigate } from "react-router-dom";
 
 import { auth, db } from "../../firebase.config";
 
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { toast } from "react-toastify";
+import {
+  addDoc,
+  collection,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore";
 
+import { toast } from "react-toastify";
 import Spinner from "../../components/ui/Spinner/Spinner";
 import "./addOrder.scss";
 
@@ -16,11 +21,11 @@ const AddOrder = () => {
     name: "",
     phone: "",
     email: "",
-    ticketNumber: 1,
+    ticketCount: 1,
     paid: false,
   });
 
-  const { name, phone, email, ticketNumber, paid } = formData;
+  const { name, phone, email, ticketCount, paid } = formData;
 
   const navigate = useNavigate();
   const isMounted = useRef(true);
@@ -49,24 +54,43 @@ const AddOrder = () => {
 
     // do a for loop across the number of tickets
     // create a ticket including:
-    // * id number
+    // * id number x
     // * an image
     //   * use the id number to generate a qr code
     //   * upload the qr code to a collection
     //   * get the reference number
     // * active/valid -> paid is true and not scanned in yet
     // * redeemed
-    // * get the ref number for each ticket
+    // * get the ref number for each ticket x
 
     // get a list of all the ticket refs...
+
+    const tickets = [];
+
+    const storeTicket = async () => {
+      const ticketRef = await addDoc(collection(db, "tickets"), {
+        active: true,
+        redeemed: false,
+        valid: true,
+      });
+
+      tickets.push(ticketRef.id);
+    };
+
+    for (let ticket = 0; ticket < ticketCount; ticket++) {
+      storeTicket();
+    }
 
     const formDataCopy = {
       ...formData,
       timestamp: serverTimestamp(),
     };
+    console.log(formDataCopy);
 
     const docRef = await addDoc(collection(db, "orders"), formDataCopy);
     console.log(docRef);
+
+    await updateDoc(docRef, { tickets: tickets });
 
     setLoading(false);
     toast.success("Order saved");
@@ -85,6 +109,12 @@ const AddOrder = () => {
     }
 
     // Files
+    // if (e.target.files) {
+    //   setFormData((prevState) => ({
+    //     ...prevState,
+    //     images: e.target.files,
+    //   }));
+    // }
 
     // Text/Boolean/Numbers
     if (!e.target.files) {
@@ -133,9 +163,10 @@ const AddOrder = () => {
         <input
           type="number"
           name="number"
-          id="number"
-          value={ticketNumber}
+          id="ticketCount"
+          value={ticketCount}
           onChange={onMutate}
+          min="1"
         />
 
         <label className="formLabel">Paid</label>
