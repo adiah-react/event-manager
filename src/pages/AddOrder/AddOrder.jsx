@@ -94,7 +94,7 @@ const AddOrder = () => {
 
     setLoading(false);
     toast.success("Order saved");
-    navigate("/home");
+    navigate(`/orders/${docRef.id}`);
   };
 
   const onMutate = (e) => {

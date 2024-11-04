@@ -1,0 +1,29 @@
+@use "../../sass/abstracts/" as abs;
+
+.ticket {
+  display: flex;
+  .code {
+    background-color: #25573e;
+    padding: abs.rem(50);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      margin-bottom: abs.rem(12);
+    }
+
+    p {
+      margin-bottom: abs.rem(30);
+    }
+  }
+  .artwork {
+    background-color: #f4f0ce;
+    background-image: url(../../assets/images/backgrounds/ticket-artwork.png);
+    background-size: cover;
+    // background-image: url(../../assets/images/backgrounds/login-morning.jpg);
+    width: abs.rem(818);
+    border-left: 4px dashed #c12d2e;
+  }
+}

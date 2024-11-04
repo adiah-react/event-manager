@@ -6,6 +6,7 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import AddOrder from "./pages/AddOrder/AddOrder";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
+import Order from "./pages/Order/Order";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
             <Route element={<PageLayout />}>
               <Route path="/home" element={<Home />} />
               <Route path="add-order" element={<AddOrder />} />
+              <Route path="/orders/:orderId" element={<Order />} />
               <Route path="/dashboard" element={<h1>dashboard</h1>} />
             </Route>
           </Route>
