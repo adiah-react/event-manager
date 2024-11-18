@@ -17,6 +17,7 @@ import "./addOrder.scss";
 
 const AddOrder = () => {
   const [loading, setLoading] = useState(false);
+  // const [names, setNames] = { name0: "" };
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -129,6 +130,26 @@ const AddOrder = () => {
     }
   };
 
+  // const onChange = (e) => {
+  //   const namesCopy = [...names];
+  //   namesCopy[e.target.name] = e.target.value;
+  //   setNames(namesCopy);
+  // };
+
+  // const data = Array.from({ length: ticketCount }, (_, index) => index);
+
+  // const nameInputs = data.map((i) => (
+  //   <input
+  //     key={i}
+  //     type="text"
+  //     // name={`name-${i}`}
+  //     name={i}
+  //     id={`name-${i}`}
+  //     value={names[i]}
+  //     onChange={onChange}
+  //   />
+  // ));
+
   return (
     <div className="order-page">
       <form className="order-form" onSubmit={onSubmit}>
@@ -168,6 +189,9 @@ const AddOrder = () => {
           onChange={onMutate}
           min="1"
         />
+
+        {/* <p>Enter names on tickets</p>
+        {nameInputs} */}
 
         <label className="formLabel">Paid</label>
         <div className="formButtons">
