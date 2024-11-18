@@ -33,15 +33,27 @@ p {
   font-weight: 400;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 // Set up the body
+
+.main {
+  font-family: "Inter", sans-serif;
+  background-color: var(--clr-bg-main);
+  color: var(--clr-main);
+}
+
 body {
-  font-family: var(--ff-sans);
-  font-size: var(--fs-400);
-  font-weight: 500;
-  background-color: var(--clr-dark);
-  color: var(--clr-light);
-  line-height: 1.5;
-  min-height: 100vh;
+  // font-family: var(--ff-sans);
+  // font-size: var(--fs-400);
+  // font-weight: 500;
+  // background-color: var(--clr-dark);
+  // color: var(--clr-light);
+  // line-height: 1.5;
+  // min-height: 100vh;
 
   // display: flex;
 
