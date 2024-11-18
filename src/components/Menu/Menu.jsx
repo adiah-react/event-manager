@@ -12,12 +12,6 @@ const menu = [
         url: "/",
         icon: "home.svg",
       },
-      {
-        id: 2,
-        title: "Profile",
-        url: "/users/1",
-        icon: "user.svg",
-      },
     ],
   },
   {
@@ -32,20 +26,14 @@ const menu = [
       },
       {
         id: 2,
-        title: "Products",
-        url: "/products",
-        icon: "product.svg",
-      },
-      {
-        id: 3,
         title: "Orders",
         url: "/orders",
         icon: "order.svg",
       },
       {
-        id: 4,
-        title: "Posts",
-        url: "/posts",
+        id: 3,
+        title: "Tickets",
+        url: "/tickets",
         icon: "post2.svg",
       },
     ],
@@ -56,24 +44,12 @@ const menu = [
     listItems: [
       {
         id: 1,
-        title: "Elements",
-        url: "/",
-        icon: "element.svg",
-      },
-      {
-        id: 2,
         title: "Notes",
         url: "/",
         icon: "note.svg",
       },
       {
-        id: 3,
-        title: "Forms",
-        url: "/",
-        icon: "form.svg",
-      },
-      {
-        id: 4,
+        id: 2,
         title: "Calendar",
         url: "/",
         icon: "calendar.svg",
@@ -89,12 +65,6 @@ const menu = [
         title: "Settings",
         url: "/",
         icon: "setting.svg",
-      },
-      {
-        id: 2,
-        title: "Backups",
-        url: "/",
-        icon: "backup.svg",
       },
     ],
   },

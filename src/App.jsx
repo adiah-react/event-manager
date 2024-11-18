@@ -7,6 +7,7 @@ import AddOrder from "./pages/AddOrder/AddOrder";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Order from "./pages/Order/Order";
+import Orders from "./pages/Orders/Orders";
 import Scan from "./pages/Scan/Scan";
 
 const App = () => {
@@ -25,7 +26,7 @@ const App = () => {
             <Route element={<PageLayout />}>
               <Route path="/home" element={<Home />} />
               <Route path="add-order" element={<AddOrder />} />
-              <Route path="/orders" element={<h1>Orders</h1>} />
+              <Route path="/orders" element={<Orders />} />
               <Route path="/orders/:orderId" element={<Order />} />
               <Route path="/scan" element={<Scan />} />
               <Route path="/dashboard" element={<h1>dashboard</h1>} />
