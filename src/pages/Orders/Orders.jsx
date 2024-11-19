@@ -1,3 +1,5 @@
+import { useState } from "react";
+import Add from "../../components/Add/Add";
 import DataTable from "../../components/DataTable/DataTable";
 import "./orders.scss";
 
@@ -44,13 +46,15 @@ const orders = [
 ];
 
 const Orders = () => {
+  const [open, setOpen] = useState(false);
   return (
     <div className="orders">
       <div className="info">
         <h1>Orders</h1>
-        <button>Add New Order</button>
+        <button onClick={() => setOpen(true)}>Add New Order</button>
       </div>
       <DataTable slug="orders" columns={columns} rows={orders} />
+      {open && <Add slug="order" columns={columns} setOpen={setOpen} />}
     </div>
   );
 };
