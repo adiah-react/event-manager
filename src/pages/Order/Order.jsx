@@ -1,5 +1,6 @@
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
+import { MdCheckCircle, MdOutlineClose } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
 import generatePDF from "react-to-pdf";
 import Ticket from "../../components/Ticket/Ticket";
@@ -37,10 +38,21 @@ const Order = () => {
   return (
     <main>
       <div className="orderDetails">
-        <p className="orderName">{order.name}</p>
-        <p className="orderEmail">{order.email}</p>
-        <p className="orderPhone">{order.phone}</p>
-        <p className="orderPayStatus">{order.paid && "Paid"}</p>
+        <h1>{order.name}</h1>
+        <div className="item">
+          <span className="itemTitle">Email:</span>
+          <span className="itemValue">{order.email}</span>
+        </div>
+        <div className="item">
+          <span className="itemTitle">Phone:</span>
+          <span className="itemValue">{order.phone}</span>
+        </div>
+        <div className="item">
+          <span className="itemTitle">Paid:</span>
+          {/* <span className="itemValue">{order.paid ? "check" : "x"}</span> */}
+          {order.paid ? <MdCheckCircle /> : <MdOutlineClose />}
+        </div>
+        {/* <p className="orderPayStatus">{order.paid && "Paid"}</p> */}
       </div>
       <button
         onClick={() => generatePDF(targetRef, { filename: "tickets.pdf" })}

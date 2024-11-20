@@ -36,18 +36,21 @@
 // }
 
 .ticket {
-  display: flex;
-  // width: abs.rem();
+  // display: flex;
+  width: abs.rem(1040);
   aspect-ratio: 2000 / 647;
   // align-items: center;
-  justify-content: center;
+  // justify-content: center;
   background-image: url(../../assets/images/backgrounds/christmas-ticket-template.png);
   background-size: cover;
   position: relative;
 
   .code {
     position: absolute;
-    left: 475px;
-    bottom: 40px;
+    top: 45%;
+    left: 46%;
+    // left: 475px;
+    // bottom: 40px;
+    width: 10%;
   }
 }

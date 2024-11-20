@@ -8,7 +8,7 @@ const Ticket = (id) => {
         {/* <h2>TICKET</h2> */}
         {/* <p>No. {id.id}</p> */}
         <p></p>
-        <QRCode bgColor="#25573e" fgColor="#c4961a" size={150} value={id.id} />
+        <QRCode bgColor="#25573e" fgColor="#c4961a" size={140} value={id.id} />
       </div>
       {/* <div className="artwork"></div> */}
     </div>
