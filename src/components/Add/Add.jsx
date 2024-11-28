@@ -50,9 +50,11 @@ const Add = ({ slug, columns, setOpen }) => {
 
     const storeTicket = async () => {
       const ticketRef = await addDoc(collection(db, "tickets"), {
-        active: true,
-        redeemed: false,
-        valid: true,
+        // active: true,
+        // redeemed: false,
+        // valid: true,
+        status: "valid",
+        event: "xOwmMpB0oZmfjUXRjMhB",
       });
 
       tickets.push(ticketRef.id);
