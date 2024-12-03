@@ -13,6 +13,37 @@ import { auth, db } from "../../firebase.config";
 import Spinner from "../ui/Spinner/Spinner";
 import "./add.scss";
 
+// const columns = [
+//   { field: "id", headerName: "ID", width: 200 },
+//   {
+//     field: "name",
+//     headerName: "Name",
+//     width: 200,
+//   },
+//   {
+//     field: "email",
+//     headerName: "Email",
+//     width: 250,
+//   },
+//   {
+//     field: "phone",
+//     headerName: "Phone Number",
+//     width: 100,
+//   },
+//   {
+//     field: "paid",
+//     headerName: "Paid",
+//     width: 90,
+//     type: "boolean",
+//   },
+//   {
+//     field: "ticketCount",
+//     headerName: "Ticket Count",
+//     type: "string",
+//     width: 100,
+//   },
+// ];
+
 const Add = ({ slug, columns, setOpen }) => {
   const [loading, setLoading] = useState(false);
   // const obj = yourArray.reduce((o, key) => ({ ...o, [key]: whatever}), {})
@@ -21,6 +52,7 @@ const Add = ({ slug, columns, setOpen }) => {
     .reduce((o, key) => ({ ...o, [key.field]: "" }), {});
 
   const [formData, setFormData] = useState(data);
+  // id, name, email, phone, paid, ticketCount
 
   const navigate = useNavigate();
   const isMounted = useRef(true);
@@ -55,6 +87,7 @@ const Add = ({ slug, columns, setOpen }) => {
         // valid: true,
         status: "valid",
         event: "xOwmMpB0oZmfjUXRjMhB",
+        name: "",
       });
 
       tickets.push(ticketRef.id);
@@ -72,6 +105,8 @@ const Add = ({ slug, columns, setOpen }) => {
     const docRef = await addDoc(collection(db, "orders"), formDataCopy);
 
     await updateDoc(docRef, { tickets: tickets });
+
+    // Create a user
 
     setLoading(false);
     toast.success("Order saved");
@@ -124,6 +159,14 @@ const Add = ({ slug, columns, setOpen }) => {
                 />
               </div>
             ))}
+          <div className="item">
+            <label htmlFor="names">Names</label>
+            <input
+              type="text"
+              placeholder="Enter names separated by a comma"
+              onChange={onMutate}
+            />
+          </div>
           <div className="item">
             <label htmlFor="">Paid</label>
             <div className="formButtons">

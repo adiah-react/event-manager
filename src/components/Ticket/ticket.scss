@@ -47,10 +47,20 @@
 
   .code {
     position: absolute;
-    top: 45%;
+    top: 30%;
     left: 46%;
     // left: 475px;
     // bottom: 40px;
-    width: 10%;
+    // width: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+
+    p {
+      font-family: serif;
+      font-size: 1.5rem;
+    }
   }
 }

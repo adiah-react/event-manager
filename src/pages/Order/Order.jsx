@@ -63,7 +63,8 @@ const Order = () => {
 
       <div className="tickets" ref={targetRef}>
         {order.tickets.map((ticket) => (
-          <Ticket key={ticket} id={ticket} />
+          <Ticket key={ticket} ticketId={ticket} />
+          // <p key={ticket}>{ticket}</p>
         ))}
       </div>
     </main>
