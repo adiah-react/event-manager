@@ -1,8 +1,16 @@
-import { onAuthStateChanged } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  updateProfile,
+} from "firebase/auth";
 import {
   addDoc,
   collection,
+  doc,
   serverTimestamp,
+  setDoc,
   updateDoc,
 } from "firebase/firestore";
 import PropTypes from "prop-types";
@@ -13,43 +21,26 @@ import { auth, db } from "../../firebase.config";
 import Spinner from "../ui/Spinner/Spinner";
 import "./add.scss";
 
-// const columns = [
-//   { field: "id", headerName: "ID", width: 200 },
-//   {
-//     field: "name",
-//     headerName: "Name",
-//     width: 200,
-//   },
-//   {
-//     field: "email",
-//     headerName: "Email",
-//     width: 250,
-//   },
-//   {
-//     field: "phone",
-//     headerName: "Phone Number",
-//     width: 100,
-//   },
-//   {
-//     field: "paid",
-//     headerName: "Paid",
-//     width: 90,
-//     type: "boolean",
-//   },
-//   {
-//     field: "ticketCount",
-//     headerName: "Ticket Count",
-//     type: "string",
-//     width: 100,
-//   },
-// ];
-
 const Add = ({ slug, columns, setOpen }) => {
+  const firebaseConfig = {
+    apiKey: "AIzaSyDpOuG7f21z_IAc_5zvvkExmjfTjqqdFhc",
+    authDomain: "events-8b504.firebaseapp.com",
+    projectId: "events-8b504",
+    storageBucket: "events-8b504.firebasestorage.app",
+    messagingSenderId: "727472486353",
+    appId: "1:727472486353:web:755ce87dbe20eb2d9d92f0",
+  };
+
+  var secondaryApp = initializeApp(firebaseConfig, "Secondary");
+  const secondaryAuth = getAuth(secondaryApp);
+
   const [loading, setLoading] = useState(false);
   // const obj = yourArray.reduce((o, key) => ({ ...o, [key]: whatever}), {})
   const data = columns
     .filter((item) => item.field !== "id")
     .reduce((o, key) => ({ ...o, [key.field]: "" }), {});
+
+  const [names, setNames] = useState([]);
 
   const [formData, setFormData] = useState(data);
   // id, name, email, phone, paid, ticketCount
@@ -69,7 +60,7 @@ const Add = ({ slug, columns, setOpen }) => {
     }
 
     return () => {
-      isMounted.curent = false;
+      isMounted.current = false;
     };
     // eslint-disable-next-line
   }, [isMounted]);
@@ -80,22 +71,23 @@ const Add = ({ slug, columns, setOpen }) => {
 
     const tickets = [];
 
-    const storeTicket = async () => {
+    const storeTicket = async (index) => {
       const ticketRef = await addDoc(collection(db, "tickets"), {
         // active: true,
         // redeemed: false,
         // valid: true,
         status: "valid",
         event: "xOwmMpB0oZmfjUXRjMhB",
-        name: "",
+        name: names[index],
+        userRef: user.uid,
       });
 
       tickets.push(ticketRef.id);
     };
 
-    for (let ticket = 0; ticket < formData.ticketCount; ticket++) {
-      storeTicket();
-    }
+    // for (let ticket = 0; ticket < formData.ticketCount; ticket++) {
+    //   storeTicket();
+    // }
 
     const formDataCopy = {
       ...formData,
@@ -104,9 +96,41 @@ const Add = ({ slug, columns, setOpen }) => {
 
     const docRef = await addDoc(collection(db, "orders"), formDataCopy);
 
-    await updateDoc(docRef, { tickets: tickets });
+    // await updateDoc(docRef, { tickets: tickets });
 
     // Create a user
+
+    // TODO: check to see if user exists first
+    // only create a new user if they don't
+
+    const password = docRef.id.slice(0, 8);
+
+    const userCredential = await createUserWithEmailAndPassword(
+      secondaryAuth,
+      formData.email,
+      password
+    );
+
+    const user = userCredential.user;
+
+    updateProfile(user, { displayName: formData.name });
+
+    const userInfo = {
+      name: formData.name,
+      email: formData.email,
+      timestamp: serverTimestamp(),
+    };
+
+    await setDoc(doc(db, "users", user.uid), userInfo);
+
+    for (let ticket = 0; ticket < formData.ticketCount; ticket++) {
+      await storeTicket(ticket);
+    }
+
+    // Add the tickets to the new order
+    await updateDoc(docRef, { tickets: tickets });
+
+    secondaryAuth.signOut();
 
     setLoading(false);
     toast.success("Order saved");
@@ -132,6 +156,11 @@ const Add = ({ slug, columns, setOpen }) => {
         [e.target.id]: boolean ?? e.target.value,
       }));
     }
+  };
+
+  const onChange = (e) => {
+    const nameString = e.target.value;
+    setNames(nameString.split(","));
   };
 
   if (loading) {
@@ -164,7 +193,7 @@ const Add = ({ slug, columns, setOpen }) => {
             <input
               type="text"
               placeholder="Enter names separated by a comma"
-              onChange={onMutate}
+              onChange={onChange}
             />
           </div>
           <div className="item">

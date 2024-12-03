@@ -1,6 +1,8 @@
+import { auth } from "../../firebase.config";
 import "./navbar.scss";
 
 const Navbar = () => {
+  const user = auth.currentUser;
   return (
     <div className="navbar">
       <div className="logo">
@@ -17,7 +19,7 @@ const Navbar = () => {
         </div>
         <div className="user">
           <img src="/pro_pic.jpg" alt="" />
-          <span>Nathaniel Adiah</span>
+          <span>{user.displayName}</span>
         </div>
         <img src="/settings.svg" alt="" className="icon" />
       </div>
