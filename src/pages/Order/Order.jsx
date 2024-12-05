@@ -40,6 +40,10 @@ const Order = () => {
       <div className="orderDetails">
         <h1>{order.name}</h1>
         <div className="item">
+          <span className="itemTitle">Order Number:</span>
+          <span className="itemValue">{params.orderId}</span>
+        </div>
+        <div className="item">
           <span className="itemTitle">Email:</span>
           <span className="itemValue">{order.email}</span>
         </div>
